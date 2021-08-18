@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_18_063454) do
+ActiveRecord::Schema.define(version: 2021_08_18_065525) do
 
   create_table "job_applications", force: :cascade do |t|
     t.boolean "seen", default: false
@@ -18,6 +18,8 @@ ActiveRecord::Schema.define(version: 2021_08_18_063454) do
     t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "job_post_id"
+    t.index ["job_post_id"], name: "index_job_applications_on_job_post_id"
     t.index ["user_id"], name: "index_job_applications_on_user_id"
   end
 
@@ -63,5 +65,6 @@ ActiveRecord::Schema.define(version: 2021_08_18_063454) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "job_applications", "job_posts"
   add_foreign_key "job_applications", "users"
 end
