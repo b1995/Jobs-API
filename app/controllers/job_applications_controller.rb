@@ -1,5 +1,6 @@
 class JobApplicationsController < ApplicationController
     before_action :authenticate_user!
+    load_and_authorize_resource
     before_action :set_job_application, only: [:show, :update, :destroy]
 
     def index

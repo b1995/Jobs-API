@@ -9,10 +9,11 @@ let!(:job_applications) { create_list(:job_application, 20, job_post_id: job_pos
 let(:user_id) { user.id }
 let(:job_post_id) { job_post.id }
 let(:id) { job_applications.first.id }
+let(:headers) { user.create_new_auth_token }
 
 
   describe "GET /index" do
-    before { get '/job_applications', params: {}}
+    before { get '/job_applications', params: {}, headers: headers}
     it 'returns job_applications' do
       puts json
       expect(json).not_to be_empty

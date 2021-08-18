@@ -1,5 +1,6 @@
 class JobPostsController < ApplicationController
     before_action :authenticate_user!
+    load_and_authorize_resource
     before_action :set_job_post, only: [:show, :update, :destroy]
 
   # GET /job_posts
