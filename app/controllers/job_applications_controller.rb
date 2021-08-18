@@ -16,8 +16,9 @@ class JobApplicationsController < ApplicationController
     
       # GET /job_applications/:id
       def show
+        @job_application.seen = true
+        @job_application.save
         json_response(@job_application)
-        @job_application.set_as_seen
       end
     
       # DELETE /job_applications/:id
@@ -35,10 +36,6 @@ class JobApplicationsController < ApplicationController
     
       def set_job_application
         @job_application = JobApplication.find(params[:id])
-      end
-
-      def set_as_seen
-          self.update_attribute(:seen, true)
       end
 
 end
