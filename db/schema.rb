@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_17_124200) do
+ActiveRecord::Schema.define(version: 2021_08_18_063454) do
+
+  create_table "job_applications", force: :cascade do |t|
+    t.boolean "seen", default: false
+    t.text "cover_letter"
+    t.integer "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_job_applications_on_user_id"
+  end
 
   create_table "job_posts", force: :cascade do |t|
     t.string "title"
@@ -47,10 +56,12 @@ ActiveRecord::Schema.define(version: 2021_08_17_124200) do
     t.text "tokens"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "admin", default: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "job_applications", "users"
 end
