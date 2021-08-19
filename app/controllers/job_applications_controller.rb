@@ -38,4 +38,8 @@ class JobApplicationsController < ApplicationController
         @job_application = JobApplication.find(params[:id])
       end
 
+      def send_mail
+        Pony.mail(:to => current_user.email, :from => 'me@example.com', :subject => 'Your application was seen by the recruiter', :body => '')
+      end
+
 end

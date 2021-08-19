@@ -1,11 +1,11 @@
 class JobPostsController < ApplicationController
     before_action :authenticate_user!
     load_and_authorize_resource
-    before_action :set_job_post, only: [:show, :update, :destroy]
+  before_action :set_job_post, only: [:show, :update, :destroy]
 
   # GET /job_posts
   def index
-    @job_posts = JobPost.all
+    @job_posts = JobPost.all.select{|job_post| !job_post.expiry_date.is_a?(Date) ||  job_post.expiry_date > Date.today}
     json_response(@job_posts)
   end
 
@@ -36,7 +36,7 @@ class JobPostsController < ApplicationController
 
   def job_post_params
     # whitelist params
-    params.permit(:title, :description, :expired)
+    params.permit(:title, :description, :expiry_date)
   end
 
   def set_job_post

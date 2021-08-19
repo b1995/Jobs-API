@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_18_065525) do
+ActiveRecord::Schema.define(version: 2021_08_19_005535) do
 
   create_table "job_applications", force: :cascade do |t|
     t.boolean "seen", default: false
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 2021_08_18_065525) do
   create_table "job_posts", force: :cascade do |t|
     t.string "title"
     t.text "description"
-    t.boolean "expired", default: false
+    t.date "expiry_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
